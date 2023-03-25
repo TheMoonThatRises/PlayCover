@@ -154,6 +154,8 @@ struct KeymappingView: View {
                         .help("settings.toggle.mm.help")
                         .disabled(!settings.settings.keymapping)
                 }
+                Spacer()
+                    .frame(height: 20)
                 HStack {
                     Text(String(
                         format: NSLocalizedString("settings.slider.mouseSensitivity", comment: ""),
@@ -201,6 +203,8 @@ struct GraphicsView: View {
                     }
                     .frame(width: 250)
                 }
+                Spacer()
+                    .frame(height: 20)
                 HStack {
                     if showResolutionWarning {
                         Spacer()
@@ -285,9 +289,11 @@ struct GraphicsView: View {
                         Spacer()
                     }
                 }
-                VStack(alignment: .leading) {
-                    if #available(macOS 13.2, *) {
-                        HStack {
+                Spacer()
+                    .frame(height: 20)
+                Group {
+                    HStack {
+                        if #available(macOS 13.2, *) {
                             Toggle("settings.picker.windowFix", isOn: $settings.settings.inverseScreenValues)
                                 .help("settings.picker.windowFix.help")
                                 .onChange(of: settings.settings.inverseScreenValues) { _ in
@@ -306,9 +312,13 @@ struct GraphicsView: View {
                         }
                         Spacer()
                     }
-                    Toggle("settings.toggle.disableDisplaySleep", isOn: $settings.settings.disableTimeout)
-                        .help("settings.toggle.disableDisplaySleep.help")
                     Spacer()
+                        .frame(height: 20)
+                    HStack {
+                        Toggle("settings.toggle.disableDisplaySleep", isOn: $settings.settings.disableTimeout)
+                            .help("settings.toggle.disableDisplaySleep.help")
+                        Spacer()
+                    }
                 }
                 Spacer()
             }
@@ -389,6 +399,7 @@ struct GraphicsView: View {
         }
         return (height / heightRatio) * widthRatio
     }
+
     func getHeightForNotch(_ width: Int, _ height: Int) -> Int {
         let wFloat = Float(width)
         let hFloat = Float(height)
@@ -423,6 +434,7 @@ struct BypassesView: View {
                     Spacer()
                 }
                 Spacer()
+                    .frame(height: 20)
                 HStack {
                     Toggle("settings.toggle.introspection", isOn: $settings.settings.injectIntrospection)
                         .help("settings.toggle.introspection.help")
@@ -531,6 +543,7 @@ struct MiscView: View {
                         }
                     }
                     Spacer()
+                        .frame(height: 20)
                     Button((hasAlias ?? true) ? "settings.removeFromLaunchpad" : "settings.addToLaunchpad") {
                         closeView.toggle()
                         if !(hasAlias ?? true) {
