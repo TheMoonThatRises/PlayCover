@@ -167,6 +167,8 @@ struct KeymappingView: View {
                     Toggle("settings.toggle.enableScrollWheel", isOn: $settings.settings.enableScrollWheel)
                         .help("settings.toggle.enableScrollWheel.help")
                     Spacer()
+                    Toggle("settings.toggle.kmhint", isOn: $settings.settings.keymapHints)
+                        .help("settings.toggle.kmhint.help")
                 }
                 HStack {
                     Text(String(

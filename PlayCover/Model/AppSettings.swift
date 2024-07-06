@@ -12,6 +12,7 @@ struct AppSettingsData: Codable {
 
     var keymapping = true
     var sensitivity: Float = 50
+    var keymapHints = false
 
     var disableTimeout = false
     var iosDeviceModel = "iPad13,8"
@@ -49,6 +50,7 @@ struct AppSettingsData: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         bundleIdentifier = try container.decodeIfPresent(String.self, forKey: .bundleIdentifier) ?? ""
         keymapping = try container.decodeIfPresent(Bool.self, forKey: .keymapping) ?? true
+        keymapHints = try container.decodeIfPresent(Bool.self, forKey: .keymapHints) ?? false
         sensitivity = try container.decodeIfPresent(Float.self, forKey: .sensitivity) ?? 50
         disableTimeout = try container.decodeIfPresent(Bool.self, forKey: .disableTimeout) ?? false
         iosDeviceModel = try container.decodeIfPresent(String.self, forKey: .iosDeviceModel) ?? "iPad13,8"
