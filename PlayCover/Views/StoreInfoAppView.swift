@@ -31,29 +31,30 @@ struct StoreInfoAppView: View {
             HStack {
                 ZStack {
                     Group {
-                        CachedAsyncImage(
-                            url: onlineIcon ?? "",
-                            placeholder: { _ in
-                                if let image = localIcon {
-                                    Image(nsImage: image)
+                        if let onlineIcon = onlineIcon {
+                            CachedAsyncImage(
+                                url: onlineIcon,
+                                image: {
+                                    Image(nsImage: $0)
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                } else {
-                                    Rectangle()
-                                        .fill(.regularMaterial)
-                                        .overlay {
-                                            ProgressView()
-                                                .progressViewStyle(.circular)
-                                                .controlSize(.small)
-                                        }
                                 }
-                            },
-                            image: {
-                                Image(nsImage: $0)
+                            )
+                        } else {
+                            if let image = localIcon {
+                                Image(nsImage: image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
+                            } else {
+                                Rectangle()
+                                    .fill(.regularMaterial)
+                                    .overlay {
+                                        ProgressView()
+                                            .progressViewStyle(.circular)
+                                            .controlSize(.small)
+                                    }
                             }
-                        )
+                        }
                     }
                     .cornerRadius(10)
                     .shadow(radius: 1)
